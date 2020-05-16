@@ -3,7 +3,7 @@ package com.louis.mangoadmin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = ("com.louis"))
 public class MangoAdminApplication {
 
     public static void main(String[] args) {

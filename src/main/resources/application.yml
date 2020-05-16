@@ -1,2 +1,10 @@
 server:
   port: 8001
+
+#配置mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://115.29.110.8:3306/mango?useUnicode=true&zeroDateTimeBehavior = convertToNull&autoReconnet=true&characterEncoding=utf-8
+    username: root
+    password: 123456root

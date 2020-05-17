@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.louis.mangoadmin.mapper.SysLoginLogMapper">
-  <resultMap id="BaseResultMap" type="com.louis.mangoadmin.model.SysLoginLog">
+<mapper namespace="com.louis.mango.admin.mapper.SysLoginLogMapper">
+  <resultMap id="BaseResultMap" type="com.louis.mango.admin.model.SysLoginLog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="status" jdbcType="VARCHAR" property="status" />
@@ -24,7 +24,7 @@
     delete from sys_login_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.louis.mangoadmin.model.SysLoginLog">
+  <insert id="insert" parameterType="com.louis.mango.admin.model.SysLoginLog">
     insert into sys_login_log (id, user_name, status, 
       ip, create_by, create_time, 
       last_update_by, last_update_time)
@@ -32,7 +32,7 @@
       #{ip,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.louis.mangoadmin.model.SysLoginLog">
+  <insert id="insertSelective" parameterType="com.louis.mango.admin.model.SysLoginLog">
     insert into sys_login_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.louis.mangoadmin.model.SysLoginLog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.louis.mango.admin.model.SysLoginLog">
     update sys_login_log
     <set>
       <if test="userName != null">
@@ -114,7 +114,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.louis.mangoadmin.model.SysLoginLog">
+  <update id="updateByPrimaryKey" parameterType="com.louis.mango.admin.model.SysLoginLog">
     update sys_login_log
     set user_name = #{userName,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},

@@ -12,6 +12,7 @@ spring:
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource
+    #配置druid
     druid:
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://115.29.110.8:3306/mango?useUnicode=true&zeroDateTimeBehavior = convertToNull&autoReconnet=true&characterEncoding=utf-8
@@ -31,5 +32,8 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
-
-#配置druid
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

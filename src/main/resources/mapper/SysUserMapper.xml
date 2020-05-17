@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.louis.mangoadmin.mapper.SysUserMapper">
-  <resultMap id="BaseResultMap" type="com.louis.mangoadmin.model.SysUser">
+<mapper namespace="com.louis.mango.admin.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.louis.mango.admin.model.SysUser">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
@@ -32,7 +32,7 @@
     delete from sys_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.louis.mangoadmin.model.SysUser">
+  <insert id="insert" parameterType="com.louis.mango.admin.model.SysUser">
     insert into sys_user (id, name, nick_name, 
       avatar, password, salt, 
       email, mobile, status, 
@@ -46,7 +46,7 @@
       #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.louis.mangoadmin.model.SysUser">
+  <insert id="insertSelective" parameterType="com.louis.mango.admin.model.SysUser">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -143,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.louis.mangoadmin.model.SysUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.louis.mango.admin.model.SysUser">
     update sys_user
     <set>
       <if test="name != null">
@@ -191,7 +191,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.louis.mangoadmin.model.SysUser">
+  <update id="updateByPrimaryKey" parameterType="com.louis.mango.admin.model.SysUser">
     update sys_user
     set name = #{name,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
@@ -211,6 +211,11 @@
   </update>
   <select id="findAll" resultMap="BaseResultMap">
     select 
+    <include refid="Base_Column_List" />
+    from sys_user
+  </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from sys_user
   </select>

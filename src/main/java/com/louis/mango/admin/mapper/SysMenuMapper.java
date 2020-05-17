@@ -3,6 +3,9 @@ package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysMenu;
 
+/**
+ * 菜单管理
+ */
 public interface SysMenuMapper {
     int deleteByPrimaryKey(Long id);
 

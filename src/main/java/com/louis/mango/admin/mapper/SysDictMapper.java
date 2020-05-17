@@ -3,6 +3,9 @@ package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysDict;
 
+/**
+ * 字典表
+ */
 public interface SysDictMapper {
     int deleteByPrimaryKey(Long id);
 

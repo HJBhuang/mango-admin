@@ -3,6 +3,9 @@ package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysDept;
 
+/**
+ * 机构管理
+ */
 public interface SysDeptMapper {
     int deleteByPrimaryKey(Long id);
 

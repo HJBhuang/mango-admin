@@ -2,8 +2,10 @@ package com.louis.mango.admin.mapper;
 
 
 import com.louis.mango.admin.model.SysConfig;
-import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * 系统配置表
+ */
 public interface SysConfigMapper {
     int deleteByPrimaryKey(Long id);
 

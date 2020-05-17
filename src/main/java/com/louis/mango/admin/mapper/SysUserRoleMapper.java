@@ -2,6 +2,9 @@ package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysUserRole;
 
+/**
+ * 用户角色
+ */
 public interface SysUserRoleMapper {
     int deleteByPrimaryKey(Long id);
 

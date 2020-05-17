@@ -3,6 +3,9 @@ package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysLog;
 
+/**
+ * 系统操作日志
+ */
 public interface SysLogMapper {
     int deleteByPrimaryKey(Long id);
 

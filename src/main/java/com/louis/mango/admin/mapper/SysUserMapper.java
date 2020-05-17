@@ -28,4 +28,6 @@ public interface SysUserMapper {
     List<SysUser> findAll();
 
     List<SysUser> findPage();
+
+    SysUser findByName(String name);
 }

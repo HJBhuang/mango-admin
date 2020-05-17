@@ -1,8 +1,10 @@
 package com.louis.mango.admin.service.impl;
 
+import com.louis.common.http.HttpResult;
 import com.louis.common.page.MybatisPageHelper;
 import com.louis.common.page.PageRequest;
 import com.louis.common.page.PageResult;
+import com.louis.mango.admin.constant.SysConstants;
 import com.louis.mango.admin.mapper.SysUserMapper;
 import com.louis.mango.admin.model.SysUser;
 import com.louis.mango.admin.service.SysUserService;
@@ -20,9 +22,15 @@ import java.util.List;
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     SysUserMapper sysUserMapper;
+
     @Override
     public List<SysUser> findAll() {
         return sysUserMapper.findAll();
+    }
+
+    @Override
+    public SysUser findByName(String name) {
+        return sysUserMapper.findByName(name);
     }
 
     @Override
@@ -47,7 +55,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        return  MybatisPageHelper.findPage(pageRequest,sysUserMapper);
+        return MybatisPageHelper.findPage(pageRequest, sysUserMapper);
 
     }
 }

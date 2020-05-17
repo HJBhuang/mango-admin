@@ -17,4 +17,6 @@ public interface SysUserService extends CurdService<SysUser> {
      * @return
      */
     List<SysUser> findAll();
+
+    SysUser findByName(String name);
 }

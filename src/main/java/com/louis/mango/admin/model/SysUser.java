@@ -1,7 +1,12 @@
 package com.louis.mango.admin.model;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Data
 public class SysUser {
     private Long id;
 
@@ -32,6 +37,13 @@ public class SysUser {
     private Date lastUpdateTime;
 
     private Byte delFlag;
+
+    // 非数据库字段
+    private String deptName;
+    // 非数据库字段
+    private String roleNames;
+    // 非数据库字段
+    private List<SysUserRole> userRoles = new ArrayList<>();
 
     public Long getId() {
         return id;

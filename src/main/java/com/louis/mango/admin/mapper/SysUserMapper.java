@@ -30,4 +30,6 @@ public interface SysUserMapper {
     List<SysUser> findPage();
 
     SysUser findByName(String name);
+
+    SysUser findById(Long id);
 }

@@ -1,7 +1,8 @@
 package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysUser;
-import org.apache.ibatis.annotations.Mapper;
+import com.louis.mango.admin.model.SysUserRole;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,7 +30,10 @@ public interface SysUserMapper {
 
     List<SysUser> findPage();
 
-    SysUser findByName(String name);
+    /*@Param 中的value值必须与mapper 中的sql里的名字保持一致*/
+    SysUser findByName(@Param(value = "name") String name);
 
     SysUser findById(Long id);
+
+    List<SysUserRole> findUserRoles(Long userId);
 }

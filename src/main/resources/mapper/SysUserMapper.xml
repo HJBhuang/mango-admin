@@ -220,7 +220,6 @@
      u.name name,
      u.nick_name nickName,
      u.avatar avatar,
-    /* u.password password,*/
      u.salt salt,
      u.email email,
      u.mobile mobile,

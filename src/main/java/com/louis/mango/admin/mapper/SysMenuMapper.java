@@ -2,6 +2,7 @@ package com.louis.mango.admin.mapper;
 
 
 import com.louis.mango.admin.model.SysMenu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,4 +25,7 @@ public interface SysMenuMapper {
     List<SysMenu> findAll();
 
     List<SysMenu> findByUserName(String userName);
+
+    List<SysMenu> findRoleMenus(@Param(value="roleId") Long roleId);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * cros配置类  解决跨域问题
  * @author huangjiabao
  * @data 2020/5/17/0017
  * @time 09:56:27

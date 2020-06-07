@@ -3,6 +3,8 @@ package com.louis.mango.admin.mapper;
 
 import com.louis.mango.admin.model.SysDept;
 
+import java.util.List;
+
 /**
  * 机构管理
  */
@@ -18,4 +20,8 @@ public interface SysDeptMapper {
     int updateByPrimaryKeySelective(SysDept record);
 
     int updateByPrimaryKey(SysDept record);
+
+    List<SysDept> findPage();
+
+    List<SysDept> findAll();
 }

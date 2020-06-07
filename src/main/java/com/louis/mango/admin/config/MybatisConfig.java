@@ -11,6 +11,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 /**
+ * mysql 相关配置类
  * @author huangjiabao
  * @data 2020/5/16/0016
  * @time 18:52:58

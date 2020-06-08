@@ -1,15 +1,16 @@
 package com.louis.mango.admin.controller;
 
 import com.louis.common.http.HttpResult;
+import com.louis.common.page.PageRequest;
+import com.louis.mango.admin.model.SysDict;
 import com.louis.mango.admin.service.SysDictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author huangjiabao
@@ -23,6 +24,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class SysDIctController {
     @Autowired
     SysDictService sysDictService;
+
+    @ApiOperation("保存字典")
+    @PostMapping("/save")
+    public HttpResult save(@RequestBody SysDict record){
+        log.debug("数字字典-保存字典,请求参数为:{}",record);
+        return HttpResult.ok(sysDictService.save(record));
+    }
+
+    @ApiOperation("删除字典")
+    @PostMapping("/delete")
+    public HttpResult delete(@RequestBody List<SysDict> records){
+        log.debug("数字字典-删除字典,请求参数为:{}",records);
+        return HttpResult.ok(sysDictService.delete(records));
+    }
+
+    @ApiOperation("分页查询")
+    @PostMapping("/findPage")
+    public HttpResult findPage(@RequestBody PageRequest pageRequest){
+        log.debug("数字字典-分页查询,请求参数为:{}",pageRequest);
+        return HttpResult.ok(sysDictService.findPage(pageRequest));
+    }
+
+    @ApiOperation("根据标签查询")
+    @GetMapping(value="/findByLable")
+    public HttpResult findByLable(@RequestParam String lable) {
+        log.debug("数字字典-根据标签查询,请求参数为:{}",lable);
+        return HttpResult.ok(sysDictService.findByLable(lable));
+    }
 
     @ApiOperation("通过标签查询数据字典")
     @GetMapping("findPageByLabel")

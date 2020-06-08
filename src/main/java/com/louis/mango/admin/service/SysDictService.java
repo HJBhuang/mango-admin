@@ -17,4 +17,11 @@ public interface SysDictService extends CurdService<SysDict> {
      * @return
      */
     List<SysDict> findPageByLabel(String label);
+
+    /**
+     * 根据名称查询
+     * @param lable
+     * @return
+     */
+    List<SysDict> findByLable(String lable);
 }

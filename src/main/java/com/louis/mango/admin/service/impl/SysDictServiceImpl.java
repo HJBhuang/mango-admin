@@ -1,5 +1,6 @@
 package com.louis.mango.admin.service.impl;
 
+import com.louis.common.page.MybatisPageHelper;
 import com.louis.common.page.PageRequest;
 import com.louis.common.page.PageResult;
 import com.louis.mango.admin.mapper.SysDictMapper;
@@ -26,27 +27,38 @@ public class SysDictServiceImpl implements SysDictService {
     }
 
     @Override
+    public List<SysDict> findByLable(String lable) {
+        return sysDictMapper.findByLabel(lable);
+    }
+
+    @Override
     public int save(SysDict record) {
-        return 0;
+        if(record.getId() == null || record.getId() == 0){
+            sysDictMapper.insertSelective(record);
+        }
+        return sysDictMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int delete(SysDict record) {
-        return 0;
+        return sysDictMapper.deleteByPrimaryKey(record.getId());
     }
 
     @Override
     public int delete(List<SysDict> records) {
-        return 0;
+        for(SysDict sysDict:records){
+            delete(sysDict);
+        }
+        return 1;
     }
 
     @Override
     public SysDict findById(Long id) {
-        return null;
+        return sysDictMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public PageResult findPage(PageRequest pageRequest) {
-        return null;
+        return MybatisPageHelper.findPage(pageRequest,sysDictMapper);
     }
 }

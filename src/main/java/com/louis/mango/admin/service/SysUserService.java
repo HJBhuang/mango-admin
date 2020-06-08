@@ -29,4 +29,6 @@ public interface SysUserService extends CurdService<SysUser> {
     List<SysUserRole> findUserRoles(Long userId);
 
     File createUserExcelFile(PageRequest pageRequest);
+
+    List<SysUser> testPagehelper(PageRequest pageRequest);
 }

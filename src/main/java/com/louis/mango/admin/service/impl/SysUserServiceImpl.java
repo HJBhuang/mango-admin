@@ -1,5 +1,7 @@
 package com.louis.mango.admin.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.louis.common.page.MybatisPageHelper;
 import com.louis.common.page.PageRequest;
 import com.louis.common.page.PageResult;
@@ -72,6 +74,16 @@ public class SysUserServiceImpl implements SysUserService {
     public File createUserExcelFile(PageRequest pageRequest) {
         PageResult pageResult = findPage(pageRequest);
         return createUserExcelFile(pageResult.getContent());
+    }
+
+    @Override
+    public List<SysUser> testPagehelper(PageRequest pageRequest) {
+         int pageNum = pageRequest.getPageNum();
+         int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum,pageSize);
+        List<SysUser> userInfo = sysUserMapper.findAll();
+        PageInfo<SysUser> sysUserPageInfo = new PageInfo<>(userInfo);
+        return sysUserPageInfo.getList();
     }
 
     @Override

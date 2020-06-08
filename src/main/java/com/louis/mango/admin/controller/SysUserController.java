@@ -1,10 +1,13 @@
 package com.louis.mango.admin.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.louis.common.http.HttpResult;
 import com.louis.common.page.PageRequest;
 import com.louis.common.utils.FileUtils;
 import com.louis.common.utils.PasswordUtils;
 import com.louis.mango.admin.constant.SysConstants;
+import com.louis.mango.admin.mapper.SysUserMapper;
 import com.louis.mango.admin.model.SysUser;
 import com.louis.mango.admin.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -29,6 +32,9 @@ import java.util.List;
 public class SysUserController {
     @Autowired
     SysUserService sysUserService;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
     @ApiOperation("新增或修改用户信息")
     @PostMapping("/save")
@@ -119,6 +125,13 @@ public class SysUserController {
         return HttpResult.ok(sysUserService.findPage(pageRequest));
     }
 
+
+    @ApiOperation("测试pagehelper")
+    @PostMapping("/pagehelper")
+    public HttpResult pagehelper(@RequestBody PageRequest pageRequest) {
+        log.info("带条件分页查询用户，请求参数为：{}", pageRequest);
+        return HttpResult.ok(sysUserService.testPagehelper(pageRequest));
+    }
 
 
 }

@@ -79,6 +79,7 @@ public class SysMenuServiceImpl implements SysMenuService {
                 }
             }
         }
+        //TODO lambda 表达式需要了解一下
         sysMenus.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
         findChildren(sysMenus, menus, menuType);
         return null;

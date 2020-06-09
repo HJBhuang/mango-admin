@@ -28,4 +28,8 @@ public interface SysLoginLogMapper {
     List<SysLog> findPageByUserName(@Param(value="userName") String userName);
 
     List<SysLog> findPageByStatus(@Param(value="status") String status);
+
+    List<SysLoginLog> findPageByUserNameAndStatus(@Param(value="userName") String userName, @Param(value="status") String status);
+
+    List<SysLoginLog> findByUserNameAndStatus(@Param(value="userName") String userName, @Param(value="status") String status);
 }

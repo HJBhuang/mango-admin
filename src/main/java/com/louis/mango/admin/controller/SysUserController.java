@@ -10,10 +10,12 @@ import com.louis.mango.admin.constant.SysConstants;
 import com.louis.mango.admin.mapper.SysUserMapper;
 import com.louis.mango.admin.model.SysUser;
 import com.louis.mango.admin.service.SysUserService;
+import com.louis.mango.admin.util.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,7 @@ public class SysUserController {
     private SysUserMapper sysUserMapper;
 
     @ApiOperation("新增或修改用户信息")
+    @PreAuthorize("hasAuthority('sys:user:add') AND hasAuthority('sys:user:edit')")
     @PostMapping("/save")
     public HttpResult save(@RequestBody SysUser record) {
         log.info("系统用户-新增或修改用户信息,请求参数为：{}", record);
@@ -69,6 +72,7 @@ public class SysUserController {
     }
 
     @ApiOperation("删除用户")
+    @PreAuthorize("hasAuthority('sys:user:delete')")
     @PostMapping("/delete")
     public HttpResult delete(@RequestBody List<SysUser> records) {
         log.debug("系统用户-删除用户,请求参数为：{}",records);
@@ -82,6 +86,7 @@ public class SysUserController {
     }
 
     @ApiOperation("通过用户名查询相关信息")
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("/findByName")
     public HttpResult findByName(@RequestParam String name) {
         log.debug("系统用户-通过用户名查询相关信息,请求参数为：{}",name);
@@ -89,6 +94,7 @@ public class SysUserController {
     }
 
     @ApiOperation("通过姓名查找权限")
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("/findPermissions")
     public HttpResult findPermissions(@RequestParam String name){
         log.debug("系统用户-通过姓名查找权限,请求参数为：{}",name);
@@ -96,6 +102,7 @@ public class SysUserController {
     }
 
     @ApiOperation("通过用户名查找角色")
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping(value="/findUserRoles")
     public HttpResult findUserRoles(@RequestParam Long userId) {
         log.debug("系统用户-通过用户名查找角色,请求参数为：{}",userId);
@@ -104,6 +111,7 @@ public class SysUserController {
 
 
     @ApiOperation("以excel形式导出用户资料")
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @PostMapping(value="/exportExcelUser")
     public void exportExcelUser(@RequestBody PageRequest pageRequest, HttpServletResponse res) {
         log.debug("系统用户-以excel形式导出用户资料,请求参数为：{}",pageRequest);
@@ -112,6 +120,7 @@ public class SysUserController {
     }
 
     @ApiOperation("查询所有用户")
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("findAll")
     public Object findAll() {
         log.info("系统用户-查询所有用户，请求参数为：");
@@ -119,6 +128,7 @@ public class SysUserController {
     }
 
     @ApiOperation("带条件分页查询用户")
+    @PreAuthorize("hasAuthority('sys:user:view')")
     @PostMapping("/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest) {
         log.info("系统用户-带条件分页查询用户，请求参数为：{}", pageRequest);
@@ -131,6 +141,23 @@ public class SysUserController {
     public HttpResult pagehelper(@RequestBody PageRequest pageRequest) {
         log.info("带条件分页查询用户，请求参数为：{}", pageRequest);
         return HttpResult.ok(sysUserService.testPagehelper(pageRequest));
+    }
+
+    @PreAuthorize("hasAuthority('sys:user:edit')")
+    @GetMapping(value="/updatePassword")
+    public HttpResult updatePassword(@RequestParam String password, @RequestParam String newPassword) {
+        SysUser user = sysUserService.findByName(SecurityUtils.getUsername());
+        if(user == null) {
+            HttpResult.error("用户不存在!");
+        }
+        if(SysConstants.ADMIN.equalsIgnoreCase(user.getName())) {
+            return HttpResult.error("超级管理员不允许修改!");
+        }
+        if(!PasswordUtils.matches(user.getSalt(), password, user.getPassword())) {
+            return HttpResult.error("原密码不正确!");
+        }
+        user.setPassword(PasswordUtils.encode(newPassword, user.getSalt()));
+        return HttpResult.ok(sysUserService.save(user));
     }
 
 

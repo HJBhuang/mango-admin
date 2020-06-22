@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -79,8 +80,13 @@ public class SysMenuServiceImpl implements SysMenuService {
                 }
             }
         }
-        //TODO lambda 表达式需要了解一下
-        sysMenus.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
+        //TODO lambda表达式需要了解一下
+        sysMenus.sort(new Comparator<SysMenu>() {
+            @Override
+            public int compare(SysMenu o1, SysMenu o2) {
+                return o1.getOrderNum().compareTo(o2.getOrderNum());
+            }
+        });
         findChildren(sysMenus, menus, menuType);
         return null;
     }
@@ -101,7 +107,12 @@ public class SysMenuServiceImpl implements SysMenuService {
                 }
             }
             SysMenu.setChildren(children);
-            children.sort((o1, o2) -> o1.getOrderNum().compareTo(o2.getOrderNum()));
+            children.sort(new Comparator<com.louis.mango.admin.model.SysMenu>() {
+                @Override
+                public int compare(com.louis.mango.admin.model.SysMenu o1, com.louis.mango.admin.model.SysMenu o2) {
+                    return o1.getOrderNum().compareTo(o2.getOrderNum());
+                }
+            });
             findChildren(children, menus, menuType);
         }
     }

@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class SysLoginLogController {
     private SysLoginLogService sysLoginLogService;
 
     @ApiOperation("分页查询")
+    @PreAuthorize("hasAuthority('sys:loginlog:view')")
     @PostMapping(value="/findPage")
     public HttpResult findPage(@RequestBody PageRequest pageRequest) {
         log.debug("登录日志-分页查询,请求参数为:{}",pageRequest);
@@ -36,6 +38,7 @@ public class SysLoginLogController {
     }
 
     @ApiOperation("删除操作日志")
+    @PreAuthorize("hasAuthority('sys:loginlog:delete')")
     @PostMapping(value="/delete")
     public HttpResult delete(@RequestBody List<SysLoginLog> records) {
         log.debug("登录日志-分页查询,请求参数为:{}",records);

@@ -9,15 +9,30 @@ import java.util.Date;
  */
 public class BaseModel {
 
+	/**
+	 *编号
+	 */
 	private Long id;
-	
+
+	/**
+	 *创建人
+	 */
     private String createBy;
 
+	/**
+	 *创建时间
+	 */
     private Date createTime;
 
+	/**
+	 *最后更新人
+	 */
     private String lastUpdateBy;
 
-    private Date lastUpdateTime;
+	/**
+	 *最后更新时间
+	 */
+	private Date lastUpdateTime;
 
 	public Long getId() {
 		return id;

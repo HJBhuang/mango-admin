@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8001
 
 #配置mysql
 #spring:
@@ -9,6 +9,12 @@ server:
 #    username: root
 #    password: 123456root
 spring:
+  application:
+    name: mango-admin
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8000"
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -32,8 +38,27 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+
 pagehelper:
   helperDialect: mysql
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+# 开放健康检查接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+

@@ -15,7 +15,7 @@ public class test {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //获取连接对象
-            String url = "jdbc:mysql://115.29.110.8:8066/TESTDB?characterEncoding=UTF-8&&autoReconnect=true&failOverReadOnly=false&useSSL=false";
+            String url = "jdbc:mysql://192.168.109.128:8066/TESTDB?characterEncoding=UTF-8&&autoReconnect=true&failOverReadOnly=false&useSSL=false";
             Connection conn = null;
             try {
                 conn = DriverManager.getConnection(url, "root", "123456");
@@ -26,12 +26,29 @@ public class test {
                 //insert(conn);
 
                 //批量插入数据
-                String sql="INSERT INTO city(id,deptname) VALUES(?,?)";
+                String sql="INSERT INTO sensor_data(id,create_time) VALUES(?,?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                for(int i=500315106;i<591000000;i++){
-                    ps.setInt(1,i);
-                    ps.setString(2,"HJB"+i);
+
+                String month="";
+                long id=0L;
+                String time="";
+                for(int i=1;i<300000;i++){
+                     id = SnowflakeIdWorkerUtils.generateId();
+                     month =i%12+"";
+                     if(month.equals("0")){
+                         month="12";
+                     }
+                     if(month.length()==1){
+                         month="0"+month;
+                     }
+                     time = "2020-"+month+"-15 15:22:22";
+                    System.out.println("time:"+time+"------id:"+id);
+
+                    ps.setLong(1,id);
+                    ps.setString(2,time);
                     ps.executeUpdate();
+                    time="";
+                    month="";
                     System.out.println("插入第"+i+"条记录！");
                 }
             } catch (SQLException e) {
@@ -45,8 +62,8 @@ public class test {
             e.printStackTrace();
         }
         long endTime = System.currentTimeMillis();
-        String time = millisToStringShort(endTime - startTime);
-        System.out.println("时间："+time);
+        String time2 = millisToStringShort(endTime - startTime);
+        System.out.println("时间："+time2);
         System.out.println("操作完成");
     }
 
